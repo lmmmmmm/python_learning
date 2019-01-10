@@ -24,7 +24,7 @@ class Student(object):
         self.name = name
         Student.count += 1
 
-#test
+#teste
 if Student.count != 0:
     print('测试失败!')
 else:

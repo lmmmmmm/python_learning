@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d3bb4edc-4be4-44aa-bf0b-d05d549c7633" name="Default" comment="初始化">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="d3bb4edc-4be4-44aa-bf0b-d05d549c7633" name="Default" comment="初始化" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,7 +35,7 @@
         <entry file="file://$PROJECT_DIR$/function/SelfDefineFunction.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="240">
-              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+              <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -91,6 +89,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -107,7 +106,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -269,8 +267,8 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.32919255" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32763976" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" sideWeight="0.49924472" visible="true" weight="0.39596274" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.32401812" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49924472" visible="true" weight="0.39596274" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.32854986" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" weight="0.32930514" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32930514" />
@@ -307,6 +305,13 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/function/SelfDefineFunction.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/function/SelfDefineFunction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -351,7 +356,7 @@
     <entry file="file://$PROJECT_DIR$/function/SelfDefineFunction.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
-          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <caret line="16" column="16" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
         </state>
       </provider>
     </entry>
