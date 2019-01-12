@@ -18,3 +18,8 @@ try:
 except urllib.error.URLError as e:
     if isinstance(e.reason, socket.timeout):
         print('超时啦!')
+
+# 构造request
+request = urllib.request.Request('https://www.pyhon.org')
+response = urllib.request.urlopen(request)
+print(response.read().decode('UTF-8'))
