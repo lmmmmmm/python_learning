@@ -2,6 +2,7 @@ import requests
 import re
 from requests.exceptions import RequestException
 from bs4 import BeautifulSoup
+import mysql.connector
 
 header = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
@@ -65,6 +66,26 @@ def parse_page_detail(content, time):
         }
 
 
+def save_article_to_db(article):
+    print('插入mysql数据', article.get('title'))
+    conn = mysql.connector.connect(user='root', password='123456', database='cms')
+    title = str(article.get('title'))
+    news_time_str = article.get('news_time')
+    news_time = str(news_time_str).replace('年', '-').replace('月', '-').replace('日', '')
+    source = str(article.get('news_from'))
+    cursor = conn.cursor()
+    sql = 'insert into cms_news (title,news_time,source,type_id values (%s,%s,%s,%s)'
+    try:
+        cursor.execute(sql, params=(title, news_time, source, '1'))
+        conn.commit()
+    except:
+        conn.rollback()
+        print(cursor._last_executed)
+
+    cursor.close()
+    conn.close
+
+
 def main(flag, start):
     response = get_one_page_index('https://yz.chsi.com.cn/kyzx/' + str(flag) + '/?start' + str(start))
     if response:
@@ -73,10 +94,12 @@ def main(flag, start):
         for urlAndtime in urls:
             # 通过列表页面url访问具体的内容
             content = get_one_page_detail(urlAndtime.get('url'))
+            # 列表中的时间
+            in_time = urlAndtime.get('time')
             if content:
-                articles = parse_page_detail(content, urlAndtime.get('in_time'))
+                articles = parse_page_detail(content, in_time)
                 for article in articles:
-                    print(article)
+                    save_article_to_db(article)
 
 
 if __name__ == '__main__':
