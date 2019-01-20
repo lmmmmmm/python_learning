@@ -2,7 +2,7 @@ import requests
 import re
 from requests.exceptions import RequestException
 from bs4 import BeautifulSoup
-import mysql.connector
+import pymysql
 
 header = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
@@ -28,7 +28,6 @@ def parse_page_index(html):
     soup = BeautifulSoup(html, "lxml")
     data = soup.select('.news-list a')
     time = soup.select('.span-time')[0].string
-    # TODO 保存文章插入时间
     pattern = re.compile('href=.*?"(.*?)"', re.S)
     for href in data:
         result = re.search(pattern, str(href))
@@ -68,20 +67,15 @@ def parse_page_detail(content, time):
 
 def save_article_to_db(article):
     print('插入mysql数据', article.get('title'))
-    conn = mysql.connector.connect(user='root', password='123456', database='cms')
+    conn = pymysql.connect(host='localhost', port=3306, user='root', password='123456', db='cms')
     title = str(article.get('title'))
     news_time_str = article.get('news_time')
     news_time = str(news_time_str).replace('年', '-').replace('月', '-').replace('日', '')
     source = str(article.get('news_from'))
     cursor = conn.cursor()
-    sql = 'insert into cms_news (title,news_time,source,type_id values (%s,%s,%s,%s)'
-    try:
-        cursor.execute(sql, params=(title, news_time, source, '1'))
-        conn.commit()
-    except:
-        conn.rollback()
-        print(cursor._last_executed)
-
+    sql = 'insert into cms_news (title,news_time,source,type_id,content) values (%s,%s,%s,%s,%s)'
+    cursor.execute(sql, (title, news_time, source, '1', str(article.get('content'))))
+    conn.commit()
     cursor.close()
     conn.close
 
