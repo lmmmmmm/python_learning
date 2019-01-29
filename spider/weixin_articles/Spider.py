@@ -9,7 +9,7 @@ db = client['wechat']
 
 base_url = 'https://weixin.sogou.com/weixin?'
 headers = {
-    'Cookie': 'SUID=26AE76316119940A000000005C4DBD78; SUV=1548598651162534; ABTEST=0|1548598654|v1; weixinIndexVisited=1; IPLOC=US; PHPSESSID=jic5s9pi0a8ktdcs05cli3atq2; seccodeRight=success; SNUID=0CEFDBCEE4E664653C655914E4682A67; successCount=2|Mon, 28 Jan 2019 16:12:24 GMT; ppinf=5|1548691675|1549901275|dHJ1c3Q6MToxfGNsaWVudGlkOjQ6MjAxN3x1bmlxbmFtZToxOTpjbGljayVFNCVCOCVCNmNsYWNrfGNydDoxMDoxNTQ4NjkxNjc1fHJlZm5pY2s6MTk6Y2xpY2slRTQlQjglQjZjbGFja3x1c2VyaWQ6NDQ6bzl0Mmx1Skp2LXRGeXd5M0t0aUJWb1FlRVVXd0B3ZWl4aW4uc29odS5jb218; pprdig=DOb9fHs-kjzWlhboJ5fAraedJF30P3OVi4_MznJWzZHnR60Ey8smIAYRTcX2NvATpzQ_wpBSTpGQb-yXl0oSCvaKJWBlhi2pg9QYLmDF-gT8HDyowC-JOauP_Ozszs_D6DF2kL1r4bzQOeQiqeia8Eun4WQWEiyQeEjjKIZgbyI; sgid=16-39003644-AVxPKNuG5ZNZsFMdhvkwbzk; ppmdig=154869162800000010ebd0e237dba9a5865f5b134eb426d4; sct=6',
+    'Cookie': 'SUID=26AE76316119940A000000005C4DBD78; SUV=1548598651162534; ABTEST=0|1548598654|v1; weixinIndexVisited=1; PHPSESSID=jic5s9pi0a8ktdcs05cli3atq2; SNUID=0CEFDBCEE4E664653C655914E4682A67; ppinf=5|1548691675|1549901275|dHJ1c3Q6MToxfGNsaWVudGlkOjQ6MjAxN3x1bmlxbmFtZToxOTpjbGljayVFNCVCOCVCNmNsYWNrfGNydDoxMDoxNTQ4NjkxNjc1fHJlZm5pY2s6MTk6Y2xpY2slRTQlQjglQjZjbGFja3x1c2VyaWQ6NDQ6bzl0Mmx1Skp2LXRGeXd5M0t0aUJWb1FlRVVXd0B3ZWl4aW4uc29odS5jb218; pprdig=DOb9fHs-kjzWlhboJ5fAraedJF30P3OVi4_MznJWzZHnR60Ey8smIAYRTcX2NvATpzQ_wpBSTpGQb-yXl0oSCvaKJWBlhi2pg9QYLmDF-gT8HDyowC-JOauP_Ozszs_D6DF2kL1r4bzQOeQiqeia8Eun4WQWEiyQeEjjKIZgbyI; sgid=16-39003644-AVxPKNuG5ZNZsFMdhvkwbzk; JSESSIONID=aaa9ya5xLSLlweLvFv6Hw; ppmdig=1548733269000000eeb4586c094dc30bd989444f8ea19890; IPLOC=CN6501; sct=8',
     'Host': 'weixin.sogou.com',
     'Referer': 'https://weixin.sogou.com/',
     'Upgrade-Insecure-Requests': '1',
@@ -35,8 +35,6 @@ max_count = 5
 
 def get_html(url, count=1):
     global proxy
-    # print("当前请求代理", proxy)
-    # print("当前请求次数", count)
     if count >= max_count:
         print('请求次数过多')
         return None
@@ -51,10 +49,8 @@ def get_html(url, count=1):
         if response.status_code == 200:
             return response.text
         if response.status_code == 302:
-            # print('302------------>ip被封')
             proxy = get_proxy()
             if proxy:
-                # print('using proxy', proxy)
                 count += 1
                 return get_html(url)
             else:
@@ -100,14 +96,14 @@ def parse_detail(atricle):
     doc = pq(atricle)
     title = doc('.rich_media_title').text()
     content = doc('.rich_media_content').text()
-    date = doc('#post-date').text()
-    nickName = doc('.rich_media_meta_list .rich_media_meta_nickname').text()
-    wechat = doc('#js_profile_grcode > div > p:nth-child(3) > span').text()
+    date = doc('.rich_media_meta rich_media_meta_text').text()
+    nickname = doc('.profile_nickname').text()
+    wechat = doc('.profile_meta_value').text()
     return {
         'title': title,
         'content': content,
         'date': date,
-        'nickName': nickName,
+        'nickname': nickname,
         'wechat': wechat
     }
 
