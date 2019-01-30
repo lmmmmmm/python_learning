@@ -41,8 +41,8 @@ ROBOTSTXT_OBEY = True
 
 # Override the default request headers:
 # DEFAULT_REQUEST_HEADERS = {
-#   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-#   'Accept-Language': 'en',
+#     'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
+#     'Accept-Language': 'en',
 # }
 
 # Enable or disable spider middlewares
